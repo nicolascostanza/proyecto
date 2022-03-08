@@ -1,0 +1,20 @@
+ponerle un maximo de letras a cada input del formulario
+boton editar, terminar
+libreria toastify
+agregar noti verde cuando agrega y roja cuando borra
+
+
+libreria chartjs (trabajar con fechas tambien)
+grafico de pie para gastos del mes ? 
+usar las animaciones q trae la libreria (delay)
+LINKS -----
+https://www.chartjs.org/docs/latest/samples/other-charts/doughnut.html
+https://www.chartjs.org/docs/latest/samples/other-charts/pie.html
+https://www.chartjs.org/docs/latest/samples/bar/stacked.html
+https://www.chartjs.org/docs/latest/samples/bar/vertical.html
+https://www.chartjs.org/docs/latest/samples/line/line.html
+https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
+
+
+
+modal para cada boton y q muestre o saque el grafico que quiero
