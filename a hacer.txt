@@ -2,7 +2,7 @@ ponerle un maximo de letras a cada input del formulario
 boton editar, terminar
 libreria toastify
 agregar noti verde cuando agrega y roja cuando borra
-
+funciones de graficos y otro input para q eliga q tipo de grafico quiere ver
 
 libreria chartjs (trabajar con fechas tambien)
 grafico de pie para gastos del mes ? 
@@ -15,6 +15,3 @@ https://www.chartjs.org/docs/latest/samples/bar/vertical.html
 https://www.chartjs.org/docs/latest/samples/line/line.html
 https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
 
-
-
-modal para cada boton y q muestre o saque el grafico que quiero
