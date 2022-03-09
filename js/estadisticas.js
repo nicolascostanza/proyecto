@@ -9,7 +9,7 @@ const eleccionVariable = document.getElementById('eleccionVariable');
 // a hacer
 // const eleccionTipo = document.getElementById("eleccionTipo");
 
-// funciones para ocultar o mostrar un grafico
+// FUNCIONES PARA OCULTAR O MOSTRAR GRAFICA
 
 function ocultarGrafico(e){
   let ocultar = document.getElementById(e);
@@ -178,10 +178,6 @@ function graficoCantidad () {
     }]
 }});
 }
-
-
-
-
 
 
 // EVENTOS

@@ -15,3 +15,34 @@ https://www.chartjs.org/docs/latest/samples/bar/vertical.html
 https://www.chartjs.org/docs/latest/samples/line/line.html
 https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
 
+libreria lottie para un loguito cuando abre la pagina ? 
+
+
+
+de santi 
+
+async function search(query) {
+    try {
+      const response = await fetch(`${api.url}?q=${query}&appid=${api.key}&lang=es`);
+      const data = await response.json();
+      card.style.display = 'block';
+      city.innerHTML = `${data.name}, ${data.sys.country}`;
+      data.innerHTML = (new Date()).toLocaleDateString();
+      temp.innerHTML = `${toCelsius(data.main.temp)}°C`;
+      weather.innerHTML = data.weather[0].description;
+      Images(data);
+    } catch (err) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ingresa otro lugar',
+      })
+    }
+  }
+
+
+  POR LAS DUDAS DEJO EL CODIGO ACA 
+
+  // btnAgregar.addEventListener("click", guardarDatos);
+// btnAgregar.addEventListener("click", imprimirDatosNuevos);
+// btnAgregar.addEventListener("click", checkForm);

@@ -14,10 +14,10 @@ let productoNuevoCosto = document.getElementById("productoNuevo__costo");
 
 // BOTONES
 
-// let btnAbrirFormulario = document.getElementById("btnAbrirFormulario");
+let btnAbrirFormulario = document.getElementById("btnAbrirFormulario");
 // let btnAbrirFormularioEliminar = document.getElementById("btnAbrirFormularioEliminar");
-let btnAgregar = document.getElementById("btnAgregar");
 // let btnAbrirFormularioEditar = document.getElementById("btnAbrirFormularioEditar");
+let btnAgregar = document.getElementById("btnAgregar");
 let btnEditar = document.getElementById("btnEditar");
 let btnEliminar = document.getElementById("btnEliminar");
 let btnImprimir = document.getElementById("btnImprimir");
@@ -25,8 +25,8 @@ let btnImprimir = document.getElementById("btnImprimir");
 
 // EVENTOS
 
-btnAgregar.addEventListener("click", guardarDatos);
-btnAgregar.addEventListener("click", imprimirDatosNuevos);
+
+btnAgregar.addEventListener("click", verificarFormulario);
 btnEliminar.addEventListener("click", eliminarProducto);
 // btnEditar.addEventListener("click", Edit);
 // btnEditar.addEventListener("click", imprimirDatosNuevos);
@@ -86,6 +86,51 @@ function imprimirDatosNuevos() {
     productoNuevoCosto.appendChild(contenedorCosto);
 }
 
+function verificarFormulario(e) {
+    e.preventDefault();
+    let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
+    let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
+    let codigoProductoNuevo = document.getElementById("codigoProductoNuevo").value;
+    let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
+    let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
+    if ((nombreProductoNuevo !== "" && nombreProductoNuevo !== 'null') && (proveedorProductoNuevo !== "" && proveedorProductoNuevo !== 'null') && (codigoProductoNuevo !== "" && codigoProductoNuevo !== 'null') && (cantidadProductoNuevo !== "" && cantidadProductoNuevo !== 'null') && (costoProductoNuevo !== "" && costoProductoNuevo !== 'null')) {
+        console.log("bien pa");
+        guardarDatos();
+        imprimirDatosNuevos();
+        // aca agrego la noti de toastify
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+    }else{
+        console.log("mal no completo");
+        // noti de mal
+    }
+
+}
+
+function eliminarProducto() {  
+    let nombreProductoEliminado = document.getElementById("nombreProductoEliminado").value;
+    const nombres = guardar.map((el) => el.nombre);
+    const indice = nombres.indexOf(nombreProductoEliminado);
+    guardar.splice(indice, 1);
+    localStorage.setItem("productosNuevos", JSON.stringify(guardar)); 
+}
+
+
 function imprimirDatos() {
     stock.forEach(e => {
     let contenedorNombre = document.createElement("div");
@@ -109,6 +154,8 @@ function imprimirDatos() {
     productoNuevoCosto.appendChild(contenedorCosto);
     })
 };
+
+
 // en proceso
 // function Edit() {
     
@@ -134,13 +181,6 @@ function imprimirDatos() {
 // }
 
 
-function eliminarProducto() {  
-    let nombreProductoEliminado = document.getElementById("nombreProductoEliminado").value;
-    const nombres = guardar.map((el) => el.nombre);
-    const indice = nombres.indexOf(nombreProductoEliminado);
-    guardar.splice(indice, 1);
-    localStorage.setItem("productosNuevos", JSON.stringify(guardar)); 
-}
 
 // CODIGO PRINCIPAL
 
@@ -150,5 +190,21 @@ stock = guardar || [];
 
 imprimirDatos();
 
+// Toastify({
+//     text: "This is a toast",
+//     duration: 3000,
+//     destination: "https://github.com/apvarun/toastify-js",
+//     newWindow: true,
+//     close: true,
+//     gravity: "top", // `top` or `bottom`
+//     position: "left", // `left`, `center` or `right`
+//     stopOnFocus: true, // Prevents dismissing of toast on hover
+//     style: {
+//       background: "linear-gradient(to right, #00b09b, #96c93d)",
+//     },
+//     onClick: function(){} // Callback after click
+//   }).showToast();
 
+
+// funcion para verificar si esta bien
 
