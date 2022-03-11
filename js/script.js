@@ -94,30 +94,12 @@ function verificarFormulario(e) {
     let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
     let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
     if ((nombreProductoNuevo !== "" && nombreProductoNuevo !== 'null') && (proveedorProductoNuevo !== "" && proveedorProductoNuevo !== 'null') && (codigoProductoNuevo !== "" && codigoProductoNuevo !== 'null') && (cantidadProductoNuevo !== "" && cantidadProductoNuevo !== 'null') && (costoProductoNuevo !== "" && costoProductoNuevo !== 'null')) {
-        console.log("bien pa");
+
         guardarDatos();
         imprimirDatosNuevos();
-        // aca agrego la noti de toastify
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-          }
+        notificacionVerde("Producto agregado");
     }else{
-        console.log("mal no completo");
-        // noti de mal
+        notificacionRoja("Complete todos los campos");
     }
 
 }
@@ -181,6 +163,36 @@ function imprimirDatos() {
 // }
 
 
+// FUNCIONES DE LIBRERIA TOASTIFY, PARA NOTIFICACIONES
+
+function notificacionVerde(e) {
+    Toastify({
+        text: e,
+        duration: 3000,
+        newWindow: true,
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
+
+}
+
+function notificacionRoja(e) {
+    Toastify({
+        text: e,
+        duration: 3000,
+        newWindow: true,
+        backgroundColor: "linear-gradient(to right, #f04f67, #ff0000)",
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
+        onClick: function(){} 
+    }).showToast();
+}
 
 // CODIGO PRINCIPAL
 
@@ -189,22 +201,3 @@ let guardar = JSON.parse(localStorage.getItem("productosNuevos"));
 stock = guardar || [];
 
 imprimirDatos();
-
-// Toastify({
-//     text: "This is a toast",
-//     duration: 3000,
-//     destination: "https://github.com/apvarun/toastify-js",
-//     newWindow: true,
-//     close: true,
-//     gravity: "top", // `top` or `bottom`
-//     position: "left", // `left`, `center` or `right`
-//     stopOnFocus: true, // Prevents dismissing of toast on hover
-//     style: {
-//       background: "linear-gradient(to right, #00b09b, #96c93d)",
-//     },
-//     onClick: function(){} // Callback after click
-//   }).showToast();
-
-
-// funcion para verificar si esta bien
-

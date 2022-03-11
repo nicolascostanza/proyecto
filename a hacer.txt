@@ -1,7 +1,10 @@
 ponerle un maximo de letras a cada input del formulario
 boton editar, terminar
-libreria toastify
-agregar noti verde cuando agrega y roja cuando borra
+
+CON EL BOTON AGREGAR VER SI TIENEN MISMO CODIGO O NOMBRE VALIDARLO Y Q SE AGREGUEN EN EL MISMO PRODUCTO
+
+EN EL BOTON BORRAR, VER CON CODIGO O NOMBRE
+
 funciones de graficos y otro input para q eliga q tipo de grafico quiere ver
 
 libreria chartjs (trabajar con fechas tambien)
@@ -16,29 +19,6 @@ https://www.chartjs.org/docs/latest/samples/line/line.html
 https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
 
 libreria lottie para un loguito cuando abre la pagina ? 
-
-
-
-de santi 
-
-async function search(query) {
-    try {
-      const response = await fetch(`${api.url}?q=${query}&appid=${api.key}&lang=es`);
-      const data = await response.json();
-      card.style.display = 'block';
-      city.innerHTML = `${data.name}, ${data.sys.country}`;
-      data.innerHTML = (new Date()).toLocaleDateString();
-      temp.innerHTML = `${toCelsius(data.main.temp)}°C`;
-      weather.innerHTML = data.weather[0].description;
-      Images(data);
-    } catch (err) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Ingresa otro lugar',
-      })
-    }
-  }
 
 
   POR LAS DUDAS DEJO EL CODIGO ACA 
