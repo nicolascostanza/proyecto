@@ -29,6 +29,7 @@ let btnImprimir = document.getElementById("btnImprimir");
 btnAgregar.addEventListener("click", verificarFormulario);
 btnEliminar.addEventListener("click", eliminarProducto);
 // btnEditar.addEventListener("click", Edit);
+
 // btnEditar.addEventListener("click", imprimirDatosNuevos);
 
 // crear un nuevo producto

@@ -1,4 +1,25 @@
-body{
-    width: 100vw;
-    height: 100vh;
+
+/* paleta de colores mia */
+.fondoHeader{
+	background-color: #1687A7;
+}
+.fondoEncabezado{
+	background-color: #1687A7;
+	border-radius: 5px;
+}
+.letrasinicio{
+	color: #F6F5F5 ;
+}
+
+.letrasInfo{
+	color: #276678 !important;
+	font-size: 1.3rem;
+}
+
+.colortabla{
+	background-color: #D3E0EA;
+	border-radius: 8px;
+}
+.colortabla2{
+	background-color: #D3E0EA !important;
 }

@@ -5,25 +5,16 @@ const costoUnitario = stock.map((el) => el.costoUnitario);
 const cantidad = stock.map((el) => el.cantidad);
 const nombres = stock.map((el) => el.nombre);
 const eleccionVariable = document.getElementById('eleccionVariable');
-
-// a hacer
-// const eleccionTipo = document.getElementById("eleccionTipo");
-
 // FUNCIONES PARA OCULTAR O MOSTRAR GRAFICA
-
 function ocultarGrafico(e){
   let ocultar = document.getElementById(e);
   ocultar.style.display = "none";
 }
-
 function mostrarGrafico(e){
   let mostrar = document.getElementById(e);
   mostrar.style.display = "block";
 }
-
 // FUNCIONES DE GRAFICOS CON LIBRERIA CHARTJS
-
-
 function graficoCosto () {
       let ctx = document.getElementById("myChartCosto").getContext("2d");
       let myChart = new Chart (ctx, {
@@ -74,8 +65,6 @@ function graficoCosto () {
         }]
     }});
 }
-
-
 function graficoCostoUnitario () {
   let ctx = document.getElementById("myChartCostoUnitario").getContext("2d");
   let myChart = new Chart (ctx, {
@@ -126,8 +115,6 @@ function graficoCostoUnitario () {
     }]
 }});
 }
-
-
 function graficoCantidad () {
   let ctx = document.getElementById("myChartCantidad").getContext("2d");
   let myChart = new Chart (ctx, {
@@ -178,15 +165,9 @@ function graficoCantidad () {
     }]
 }});
 }
-
-
 // EVENTOS
-
 eleccionVariable.addEventListener('change', (e) => {
   let valor = e.target.value;
-  console.log(valor);
-  
-  
   if (valor == "costo") {
     ocultarGrafico("myChartCostoUnitario");
     ocultarGrafico("myChartCantidad");
@@ -206,22 +187,3 @@ eleccionVariable.addEventListener('change', (e) => {
     graficoCantidad();
   }
 });
-
-// a hacer cambio de tipo de grafico
-
-// eleccionTipo.addEventListener('change', (e) => {
-//   let valor = e.target.value;
-//   console.log(valor);
-//   if (valor == "line"){
-    
-//   }else if (valor == "bar"){
-//     graficoCostoUnitario(valor);
-//   }else if (valor == "pie"){
-
-//   }
-// })
-
-
-console.log(stock);
-
-
