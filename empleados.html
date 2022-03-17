@@ -23,14 +23,14 @@
 <body>
     <div class="row">
         <div class="col-12 fondoHeader">
-            <h3 class="text-center letrasinicio">CLIENTES</h3>
+            <h3 class="text-center letrasinicio">EMPLEADOS</h3>
         </div>  
     </div>
 
     <div class="row">
         <!-- menu principal (parte izquierda de la pantalla) -->
         <div class="col-1  px-0 vh-100 d-flex flex-column bd-highlight mb-3">
-            <button type="button" class="btn btn-outline-primary "><a href="ventas.html"><i class="fa-solid fa-money-check-dollar fa-3x"></i><p>Ventas</p></a></button>
+            <button type="button" class="btn btn-outline-primary "><a href="ventas.html"><i class="fa-solid fa-money-check-dollar fa-3x"></i><p>ventas</p></a></button>
             <button type="button" class="btn btn-outline-primary "><a href="clientes.html"><i class="fa-solid fa-id-card fa-3x"></i><p>Clientes</p></a></button>
             <button type="button" class="btn btn-outline-primary "><a href="index.html"><i class="fa-solid fa-box fa-3x"></i><p>Productos</p></a></button>
             <button type="button" class="btn btn-outline-primary "><a href="pagos.html"><i class="fa-solid fa-file-invoice-dollar fa-3x"></i><p>Cuentas a Pagar</p></a></button>
@@ -45,11 +45,11 @@
                         <div class="table-title fondoEncabezado">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h2>Cartera de <b>Clientes</b></h2>
+                                    <h2>Gestion de <b>Empleados</b></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="#eliminarProducto" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Cliente</span></a>						
-                                    <a href="#agregarProducto" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Cliente</span></a>
+                                    <a href="#eliminarProducto" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Empleado</span></a>						
+                                    <a href="#agregarProducto" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Empleado</span></a>
                                 </div>
                             </div>
                         </div>
@@ -58,20 +58,20 @@
                             <thead>
                                 <tr>
                                     <th class="letrasInfo text-center">Nombre</th>
-                                    <th class="letrasInfo text-center">Empresa</th>
                                     <th class="letrasInfo text-center">Telefono</th>
-                                    <th class="letrasInfo text-center">Email</th>
                                     <th class="letrasInfo text-center">Direccion</th>
+                                    <th class="letrasInfo text-center">Ingreso a la empresa</th>
+                                    <th class="letrasInfo text-center">Email</th>
                                 </tr>
                             </thead>
                             <!-- body de la tabla -->
                             <tbody>
                                 <tr class="colortabla2">
                                     <td id="nombreNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="empresaNuevo" class="letrasInfo text-center border"></td>
                                     <td id="telefonoNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="emailNuevo" class="letrasInfo text-center border"></td>
                                     <td id="direccionNuevo" class="letrasInfo text-center border"></td>
+                                    <td id="ingresoNuevo" class="letrasInfo text-center border"></td>
+                                    <td id="emailNuevo" class="letrasInfo text-center border"></td>
                                 </tr>  
                             </tbody>
                         </table>
