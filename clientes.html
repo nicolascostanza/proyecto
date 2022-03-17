@@ -67,11 +67,11 @@
                             <!-- body de la tabla -->
                             <tbody>
                                 <tr class="colortabla2">
-                                    <td id="nombreNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="empresaNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="telefonoNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="emailNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="direccionNuevo" class="letrasInfo text-center border"></td>
+                                    <td id="nombreNuevo" class="letrasInfo text-center nowrap border"></td>
+                                    <td id="empresaNuevo" class="letrasInfo text-center nowrap border"></td>
+                                    <td id="telefonoNuevo" class="letrasInfo text-center nowrap border"></td>
+                                    <td id="emailNuevo" class="letrasInfo text-center nowrap border"></td>
+                                    <td id="direccionNuevo" class="letrasInfo text-center text-nowrap border"></td>
                                 </tr>  
                             </tbody>
                         </table>
@@ -91,23 +91,23 @@
                             <div class="modal-body">					
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input type="text" id="nombreProductoNuevo" class="form-control" required>
+                                    <input type="text" id="nombreClienteNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <input type="text" id="proveedorProductoNuevo" class="form-control" required>
+                                    <label>Empresa</label>
+                                    <input type="text" id="empresaClienteNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Codigo</label>
-                                    <input type="text" id="codigoProductoNuevo" class="form-control" required>
+                                    <label>Telefono</label>
+                                    <input type="number" id="telefonoClienteNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <input type="number" id="cantidadProductoNuevo" class="form-control" required>
+                                    <label>Email</label>
+                                    <input type="email" id="emailClienteNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Costo</label>
-                                    <input type="number" id="costoProductoNuevo" class="form-control" required>
+                                    <label>Direccion</label>
+                                    <input type="text" id="direccionClienteNuevo" class="form-control" required>
                                 </div>					
                             </div>
                             <div class="modal-footer">
@@ -119,7 +119,7 @@
                 </div>
             </div>
             <!-- MODAL EDITAR -->
-            <div id="editarProducto" class="modal fade">
+            <!-- <div id="editarProducto" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form>
@@ -156,7 +156,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- <div id="editarProducto" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -204,9 +204,13 @@
                                 <h4 class="modal-title">Eliminar producto</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
-                            <div class="modal-body">					
-                                <p>Esta seguro que desea eliminar el producto ?</p>
-                                <h6 class="text-danger">Esta acción no se puede deshacer.</h6>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" id="nombreClienteEliminado" class="form-control" required>
+                                    <p class="mt-2">Esta seguro que desea eliminar el Cliente?</p>
+                                    <h6 class="text-danger">Esta acción no se puede deshacer.</h6>
+                                </div>				
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-info" data-dismiss="modal" value="Cancelar">
@@ -220,6 +224,7 @@
 
     <!-- a agregar  -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- <script src="js/index.js"></script> -->
     <script src="js/clientes.js"></script>
 </body>
 </html>

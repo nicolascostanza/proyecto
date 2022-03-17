@@ -3,6 +3,7 @@ LA PAGINA ME LOS CONVIERTE TODOS A OBJETO, PERO CUANDO VOY AGREGANDO HACE UNA CL
 
 TAMBIEN PREGUNTARLE COMO HACER PARA VALIDAR 
 
+en clientes hacer q direccion quede en la misma linea
 
 hacer el hoover con letra negra
 ponerle un maximo de letras a cada input del formulario

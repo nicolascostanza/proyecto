@@ -173,6 +173,13 @@ function imprimirDatos() {
         })
 }
 
+function eliminarProducto() {  
+    let codigoProductoEliminado = document.getElementById("codigoProductoEliminado").value;
+    const codigo = guardar.map((e) => e.codigo);    
+    const indice = codigo.indexOf(codigoProductoEliminado);
+    guardar.splice(indice, 1);
+    localStorage.setItem("productosNuevos", JSON.stringify(guardar)); 
+}
 
 // CODIGO PRINCIPAL
 let guardar = JSON.parse(localStorage.getItem("productosNuevos"));
