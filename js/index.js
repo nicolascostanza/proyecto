@@ -1,3 +1,4 @@
+// import{notificacionVerde, notificacionRoja} from "./toast.js"
 $(document).ready(function(){
 	// Activate tooltip
 	$('[data-toggle="tooltip"]').tooltip();
