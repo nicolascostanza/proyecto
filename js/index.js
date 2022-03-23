@@ -1,33 +1,6 @@
-// import{notificacionVerde, notificacionRoja} from "./toast.js"
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-	
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;                        
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;                        
-			});
-		} 
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
-
-// aca empieza lo mio, lo de arriba es robado
 // VARIABLES
 let stock = [];
 let btnAgregar = document.getElementById("botonAgregar");
-let btnEditar = document.getElementById("botonEditar");
 let btnEliminar = document.getElementById("botonEliminar");
 let nombreNuevo = document.getElementById("nombreNuevo");
 let proveedorNuevo = document.getElementById("proveedorNuevo");
@@ -35,45 +8,24 @@ let codigoNuevo = document.getElementById("codigoNuevo");
 let cantidadNuevo = document.getElementById("cantidadNuevo");
 let costoNuevo = document.getElementById("costoNuevo");
 let costoUnitarioNuevo = document.getElementById("costoUnitarioNuevo");
-let prueba = document.getElementById("editarProducto");
+let respuesta = Boolean;
 // EVENTOS
-btnAgregar.addEventListener("click", verificarFormulario);
-// btnEditar.addEventListener("click", Editar);
-// btnAgregar.addEventListener("click", mismoProducto);
-// para boton agregar
-let respuesta = 0;
-console.log(respuesta);
-function verificarFormulario(e) {
-    e.preventDefault();
-    let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
-    let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
-    let codigoProductoNuevo = document.getElementById("codigoProductoNuevo").value;
-    let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
-    let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
-    let codigos = stock.map((e) => e.codigo);
-    // console.log(respuesta);
-    codigos.forEach(e => {
-        if(e === codigoProductoNuevo){
-            respuesta = 5;
-            // console.log(respuesta);
-        }else{
-            respuesta = 1 ;
-        }
-    })
-    // console.log(respuesta);
-    if ((nombreProductoNuevo !== "" && nombreProductoNuevo !== 'null') && (proveedorProductoNuevo !== "" && proveedorProductoNuevo !== 'null') && (respuesta !== 5) && (codigoProductoNuevo !== "" && codigoProductoNuevo !== 'null') && (cantidadProductoNuevo !== "" && cantidadProductoNuevo !== 'null') && (costoProductoNuevo !== "" && costoProductoNuevo !== 'null')) {
-        guardarDatos();
-        imprimirDatosNuevos();
-        notificacionVerde("Producto agregado");
-        // console.log(respuesta);
-    }else{
-        notificacionRoja("Complete todos los campos");
-        // console.log(respuesta);
+btnAgregar.addEventListener("click", agregar);
+btnEliminar.addEventListener("click", eliminar);
+// CLASE DE PRODUCTO
+class Producto{
+    constructor(nombre, proveedor, codigo, cantidad, costo, costoUnitario) {
+        this.nombre = nombre;
+        this.proveedor = proveedor;
+        this.codigo = codigo;
+        this.cantidad = cantidad;
+        this.costo  = costo;
+        this.costoUnitario = ((this.costo) / (this.cantidad)).toFixed(2);
     }
-    // console.log(respuesta);
 }
+// FUNCIONES
 // FUNCIONES DE TOAST 
-function notificacionVerde(e) {
+function notificacionVerde(e){
     Toastify({
         text: e,
         duration: 3000,
@@ -86,7 +38,6 @@ function notificacionVerde(e) {
         },
         onClick: function(){} // Callback after click
     }).showToast();
-
 }
 function notificacionRoja(e) {
     Toastify({
@@ -100,7 +51,43 @@ function notificacionRoja(e) {
         onClick: function(){} 
     }).showToast();
 }
-// FUNCIONES PARA BTN AGREGAR
+// FUNCION BTN AGREGAR
+function agregar (e) {
+        respuesta = false;
+        let localStorageActualizado = [];
+        e.preventDefault();
+        let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
+        let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
+        let codigoProductoNuevo = document.getElementById("codigoProductoNuevo").value;
+        let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
+        let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
+        // verifico que los campos esten completos sino obligo a completarlos
+        if ((nombreProductoNuevo !== "" && nombreProductoNuevo !== null) &&
+        (proveedorProductoNuevo !== "" && proveedorProductoNuevo !== null) &&
+        (codigoProductoNuevo !== "" && codigoProductoNuevo !== null) &&
+        (cantidadProductoNuevo !== "" && cantidadProductoNuevo !== null) &&
+        (costoProductoNuevo !== "" && costoProductoNuevo !== null)) {
+            // traigo el localstorage actualizado para verificar que el codigo no este en uso
+            localStorageActualizado = JSON.parse(localStorage.getItem("productosNuevos"));
+            localStorageActualizado.forEach(localStorageActualizado => {
+                if(localStorageActualizado.codigo === codigoProductoNuevo){
+                    respuesta = true;
+                }
+            })
+            if (respuesta){
+                notificacionRoja("Codigo existente");
+            }else{ 
+                guardarDatos();
+                imprimirDatosNuevos();
+                notificacionVerde("Producto agregado");
+            }            
+        }else{
+            notificacionRoja("Complete todos los campos");
+        }
+        // le otorgo otro valor a respuesta para el proximo foreach de localStorageNuevo
+        respuesta = false;
+};
+// SUBFUNCIONES DEL BTN AGREGAR
 function guardarDatos() {
     let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
     let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
@@ -137,19 +124,7 @@ function imprimirDatosNuevos() {
     costoNuevo.appendChild(contenedorCosto);
     costoUnitarioNuevo.appendChild(contenedorCostoUnitario);
 }
-// CLASE DE PRODUCTO
-
-class Producto{
-    constructor(nombre, proveedor, codigo, cantidad, costo, costoUnitario) {
-        this.nombre = nombre;
-        this.proveedor = proveedor;
-        this.codigo = codigo;
-        this.cantidad = cantidad;
-        this.costo  = costo;
-        this.costoUnitario = ((this.costo) / (this.cantidad)).toFixed(2);
-    }
-}
-
+// IMPRIME LOS DATOS CUANDO CARGA LA PAGINA
 function imprimirDatos() {
     stock.forEach(e => {
         let contenedorNombre = document.createElement("div");
@@ -173,15 +148,35 @@ function imprimirDatos() {
         costoUnitarioNuevo.appendChild(contenedorCostoUnitario);
         })
 }
-
-function eliminarProducto() {  
+// FUNCION BOTON ELIMINAR
+function eliminar(e) {
+    respuesta = false; 
+    let localStorageActualizado = [];
+    e.preventDefault();
+    // tomo el valor y valido que haya rellenado
     let codigoProductoEliminado = document.getElementById("codigoProductoEliminado").value;
-    const codigo = guardar.map((e) => e.codigo);    
-    const indice = codigo.indexOf(codigoProductoEliminado);
-    guardar.splice(indice, 1);
-    localStorage.setItem("productosNuevos", JSON.stringify(guardar)); 
-}
+    if (codigoProductoEliminado !== "" && codigoProductoEliminado !== null) {
+        localStorageActualizado = JSON.parse(localStorage.getItem("productosNuevos"));
+        localStorageActualizado.forEach(localStorageActualizado => {
+            if(localStorageActualizado.codigo === codigoProductoEliminado){
+                respuesta = true;
+            }})
+            // segun si el codigo existe borro o no
+            if (respuesta){
+                const codigos = localStorageActualizado.map((e) => e.codigo);    
+                const indice = codigos.indexOf(codigoProductoEliminado);
+                guardar.splice(indice, 1);
+                localStorage.setItem("productosNuevos", JSON.stringify(guardar)); 
 
+                notificacionVerde("producto eliminado. F5 para ver cambios");
+            }else{ 
+                notificacionRoja("Codigo Inexistente");
+            }            
+    }else{
+        notificacionRoja("Ingrese Codigo");
+    }
+    respuesta = false; 
+}
 // CODIGO PRINCIPAL
 let guardar = JSON.parse(localStorage.getItem("productosNuevos"));
 stock = guardar || [];

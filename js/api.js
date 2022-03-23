@@ -5,5 +5,5 @@ fetch(url)
     .then((data) => {
         let compra = data[1].casa.compra;
         let venta = data[1].casa.venta;
-        dom.innerHTML = `<h4 class="text-end"> USD: COMPRA $${compra}  VENTA $${venta}</h4>`;
+        dom.innerHTML = `<h4 class="text-end">💵 USD: COMPRA $${compra}  VENTA $${venta}</h4>`;
     });

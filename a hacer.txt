@@ -1,6 +1,8 @@
 PREGUNTAR A FEDE, CUANDO VOY AGREGANDO NO QUIERO Q ME AGREGUE DOS VECES EL MISMO, CUANDO REFRESCO
 LA PAGINA ME LOS CONVIERTE TODOS A OBJETO, PERO CUANDO VOY AGREGANDO HACE UNA CLASE PRODUCTO Y CON EL OBJETO
 
+como hacer para sacarle el subrayado a los botones
+
 TAMBIEN PREGUNTARLE COMO HACER PARA VALIDAR 
 
 en clientes hacer q direccion quede en la misma linea
@@ -12,13 +14,8 @@ boton editar, terminar
 CON EL BOTON AGREGAR VER SI TIENEN MISMO CODIGO O NOMBRE VALIDARLO Y Q SE AGREGUEN EN EL MISMO PRODUCTO
 
 EN EL BOTON BORRAR, VER CON CODIGO O NOMBRE
-
-grafico de pie para gastos del mes ? 
 usar las animaciones q trae la libreria (delay)
 libreria lottie para un loguito cuando abre la pagina ? 
-
-seeguir con el styleado de css
-
 
 
   POR LAS DUDAS DEJO EL CODIGO ACA 
@@ -26,6 +23,33 @@ seeguir con el styleado de css
   // btnAgregar.addEventListener("click", guardarDatos);
 // btnAgregar.addEventListener("click", imprimirDatosNuevos);
 // btnAgregar.addEventListener("click", checkForm);
+
+CODIGO DE ARRIBA DEL CRUD ROBADO 
+
+// import{notificacionVerde, notificacionRoja} from "./toast.js"
+// $(document).ready(function(){
+// 	// Activate tooltip
+// 	$('[data-toggle="tooltip"]').tooltip();
+	
+// 	// Select/Deselect checkboxes
+// 	var checkbox = $('table tbody input[type="checkbox"]');
+// 	$("#selectAll").click(function(){
+// 		if(this.checked){
+// 			checkbox.each(function(){
+// 				this.checked = true;                        
+// 			});
+// 		} else{
+// 			checkbox.each(function(){
+// 				this.checked = false;                        
+// 			});
+// 		} 
+// 	});
+// 	checkbox.click(function(){
+// 		if(!this.checked){
+// 			$("#selectAll").prop("checked", false);
+// 		}
+// 	});
+// });
 
 
 crud piolon
