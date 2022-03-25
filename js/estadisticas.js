@@ -1,5 +1,5 @@
 // VARIABLES
-let stock = JSON.parse(localStorage.getItem("productosNuevos"));
+let stock = JSON.parse(localStorage.getItem("ListaProductos"));
 const costo = stock.map((el) => el.costo);
 const costoUnitario = stock.map((el) => el.costoUnitario);
 const cantidad = stock.map((el) => el.cantidad);

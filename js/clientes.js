@@ -1,14 +1,15 @@
+// IMPORTS
+import { notificacionVerde, notificacionRoja } from './toast.js';
 // VARIABLES
 let clientes = [];
-let respuesta = 0;
+let respuesta = Boolean;
 // BOTONES
 const btnAgregar = document.getElementById("botonAgregar");
 const btnEliminar = document.getElementById("botonEliminar");
 // EVENTOS
-btnAgregar.addEventListener("click", verificarFormulario);
-btnEliminar.addEventListener("click", eliminarProducto);
+btnAgregar.addEventListener("click", agregar);
+btnEliminar.addEventListener("click", eliminar);
 // CLASE DE CLIENTE
-
 class Cliente{
     constructor(nombre, empresa, telefono, email, direccion) {
         this.nombre = nombre;
@@ -18,48 +19,45 @@ class Cliente{
         this.direccion  = direccion;
     }
 }
-
 // FUNCIONES
-function verificarFormulario(e) {
+function agregar(e) {
     e.preventDefault();
     const nombreClienteNuevo = document.getElementById("nombreClienteNuevo").value;
     const empresaClienteNuevo = document.getElementById("empresaClienteNuevo").value;
     const telefonoClienteNuevo = document.getElementById("telefonoClienteNuevo").value;
     const emailClienteNuevo = document.getElementById("emailClienteNuevo").value;
     const direccionClienteNuevo = document.getElementById("direccionClienteNuevo").value;
-    let nombres = clientes.map((e) => e.nombre);
-    // console.log(respuesta);
-    nombres.forEach(e => {
-        if(e === nombreClienteNuevo){
-            respuesta = 5;
-            // console.log(respuesta);
-        }else{
-            respuesta = 1 ;
+    // verifico que completo todos los campos (if anidados)
+    if (
+        nombreClienteNuevo !== "" &&
+        nombreClienteNuevo !== null &&
+        empresaClienteNuevo !== "" &&
+        empresaClienteNuevo !== null &&
+        telefonoClienteNuevo !== "" &&
+        telefonoClienteNuevo !== null &&
+        emailClienteNuevo !== "" &&
+        emailClienteNuevo !== null &&
+        direccionClienteNuevo !== "" &&
+        direccionClienteNuevo !== null
+    ) {
+        // si tiene email distinto le dejo cargar el cliente
+        if (!clientes.some((e) => e.email === emailClienteNuevo)){
+            // paso los parametros tomados a la funcion guardardatos
+            guardarDatos(nombreClienteNuevo, empresaClienteNuevo, telefonoClienteNuevo, emailClienteNuevo, direccionClienteNuevo);
+			imprimirDatosNuevos();
+			notificacionVerde("Cliente agregado");
+        } else {
+            notificacionRoja("Email ya registrado");
         }
-    })
-    // console.log(respuesta);
-    if ((nombreClienteNuevo !== "" && nombreClienteNuevo !== 'null') && (empresaClienteNuevo !== "" && empresaClienteNuevo !== 'null') && (respuesta !== 5) && (telefonoClienteNuevo !== "" && telefonoClienteNuevo !== 'null') && (emailClienteNuevo !== "" && emailClienteNuevo !== 'null') && (direccionClienteNuevo !== "" && direccionClienteNuevo !== 'null')) {
-        guardarDatos();
-        imprimirDatosNuevos();
-        notificacionVerde("Producto agregado");
-        // console.log(respuesta);
-    }else{
-        notificacionRoja("Complete todos los campos");
-        // console.log(respuesta);
-    }
-    // console.log(respuesta);
+    } else {
+		notificacionRoja("Complete todos los campos");
+	}
 }
-
-function guardarDatos() {
-    let nombreClienteNuevo = document.getElementById("nombreClienteNuevo").value;
-    let empresaClienteNuevo = document.getElementById("empresaClienteNuevo").value;
-    let telefonoClienteNuevo = document.getElementById("telefonoClienteNuevo").value;
-    let emailClienteNuevo = document.getElementById("emailClienteNuevo").value;
-    let direccionClienteNuevo = document.getElementById("direccionClienteNuevo").value;
-    const cliente = new Cliente(nombreClienteNuevo, empresaClienteNuevo, telefonoClienteNuevo, emailClienteNuevo, direccionClienteNuevo);
+function guardarDatos(nombre, empresa, telefono, email, direccion) {
+    const cliente = new Cliente(nombre, empresa, telefono, email, direccion);
     clientes.push(cliente);
     // guardo en localstorage el nuevo producto cargado
-    localStorage.setItem("clientesNuevos", JSON.stringify(clientes)); 
+    localStorage.setItem("ListaClientes", JSON.stringify(clientes)); 
 }
 
 function imprimirDatosNuevos() {
@@ -102,44 +100,36 @@ function imprimirDatos() {
         direccionNuevo.appendChild(contenedorDireccion);
         })  
 }
-// FUNCIONES DE TOAST 
-function notificacionVerde(e) {
-    Toastify({
-        text: e,
-        duration: 3000,
-        newWindow: true,
-        gravity: "top", 
-        position: "right", 
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-        background: "linear-gradient(to right, #00b09b, #96c93d)",
-        },
-        onClick: function(){} // Callback after click
-    }).showToast();
-
-}
-function notificacionRoja(e) {
-    Toastify({
-        text: e,
-        duration: 3000,
-        newWindow: true,
-        backgroundColor: "linear-gradient(to right, #f04f67, #ff0000)",
-        gravity: "top", 
-        position: "right", 
-        stopOnFocus: true, 
-        onClick: function(){} 
-    }).showToast();
-}
-
-function eliminarProducto() {  
-    let nombreClienteEliminado = document.getElementById("nombreClienteEliminado").value;
-    const nombres = guardar.map((e) => e.nombre);    
-    const indice = nombres.indexOf(nombreClienteEliminado);
-    guardar.splice(indice, 1);
-    localStorage.setItem("clientesNuevos", JSON.stringify(guardar)); 
+function eliminar(e) {
+    respuesta = false;
+	let localStorageActualizado = [];
+	e.preventDefault();
+	// tomo el valor y valido que haya rellenado
+	let emailClienteEliminado = document.getElementById("emailClienteEliminado").value;
+	if (emailClienteEliminado !== "" && emailClienteEliminado !== null) {
+		localStorageActualizado = JSON.parse(localStorage.getItem("ListaClientes"));
+		localStorageActualizado.forEach((ls) => {
+			if (ls.email === emailClienteEliminado) {
+				respuesta = true;
+			}
+		});
+		// segun si el codigo existe borro o no
+		if (respuesta) {
+			const emails = localStorageActualizado.map((e) => e.email);
+			const indice = emails.indexOf(emailClienteEliminado);
+			guardar.splice((indice), 1);
+			localStorage.setItem("ListaClientes", JSON.stringify(guardar));
+            notificacionVerde("Cliente eliminado. F5 para ver cambios");
+            }else{ 
+                notificacionRoja("Codigo Inexistente");
+            }            
+    }else{
+        notificacionRoja("Ingrese Codigo");
+    }
+    respuesta = false; 
 }
 
 // CODIGO PRINCIPAL
-let guardar = JSON.parse(localStorage.getItem("clientesNuevos"));
+let guardar = JSON.parse(localStorage.getItem("ListaClientes"));
 clientes = guardar || [];
 imprimirDatos();

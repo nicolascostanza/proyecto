@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Clientes</title>
-<link rel="stylesheet" href="css/asd.css">
+<link rel="stylesheet" href="css/crud.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -42,7 +43,7 @@
             <div class="container-fluid px-2">
                 <div class="table-responsive">
                     <div class="table-wrapper">
-                        <!-- parte de arriba de gestion de productos y los botones de la derecha -->
+                        <!-- parte de arriba de gestion de clientes y los botones de la derecha -->
                         <div class="table-title fondoEncabezado">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -119,96 +120,19 @@
                     </div>
                 </div>
             </div>
-            <!-- MODAL EDITAR -->
-            <!-- <div id="editarProducto" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form>
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Editar Producto</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">					
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" id="nombreProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <input type="text" id="proveedorProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Codigo</label>
-                                    <input type="text" id="codigoProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <input type="number" id="cantidadProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Costo</label>
-                                    <input type="number" id="costoProductoNuevo" class="form-control" required>
-                                </div>					
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancelar">
-                                <input type="submit" id="botonEditar" class="btn btn-success" value="Agregar">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div id="editarProducto" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form>
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Editar Producto</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">					
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Codigo</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <input type="number" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Costo</label>
-                                    <input type="number" class="form-control" required>
-                                </div>					
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancelar">
-                                <input type="submit" id="botonEditar" class="btn btn-success" value="Guardar">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
             <!-- MODAL ELIMINAR  -->
             <div id="eliminarProducto" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">						
-                                <h4 class="modal-title">Eliminar producto</h4>
+                                <h4 class="modal-title">Eliminar Cliente</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" id="nombreClienteEliminado" class="form-control" required>
+                                    <label>Email</label>
+                                    <input type="text" id="emailClienteEliminado" class="form-control" required>
                                     <p class="mt-2">Esta seguro que desea eliminar el Cliente?</p>
                                     <h6 class="text-danger">Esta acción no se puede deshacer.</h6>
                                 </div>				
@@ -225,7 +149,8 @@
 
     <!-- a agregar  -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="js/clientes.js"></script>
+    <script src="js/clientes.js" type="module"></script>
+    <script src="js/toast.js" type="module"></script>
     <script src="js/api.js" type="module"></script>
 </body>
 </html>

@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Clientes</title>
-<link rel="stylesheet" href="css/asd.css">
+<link rel="stylesheet" href="css/crud.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -49,8 +50,8 @@
                                     <h2>Cuentas a <b>Pagar</b></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="#eliminarProducto" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>BORRAR CUENTA</span></a>						
-                                    <a href="#agregarProducto" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>AGREGAR CUENTA</span></a>
+                                    <a href="#eliminarCuenta" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>BORRAR CUENTA</span></a>						
+                                    <a href="#agregarCuenta" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>AGREGAR CUENTA</span></a>
                                 </div>
                             </div>
                         </div>
@@ -59,18 +60,18 @@
                             <thead>
                                 <tr>
                                     <th class="letrasInfo text-center">Tipo</th>
+                                    <th class="letrasInfo text-center">Codigo</th>
                                     <th class="letrasInfo text-center">Vencimiento</th>
-                                    <th class="letrasInfo text-center">Fecha</th>
                                     <th class="letrasInfo text-center">Valor</th>
                                 </tr>
                             </thead>
                             <!-- body de la tabla -->
                             <tbody>
                                 <tr class="colortabla2">
-                                    <td id="tipoNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="vencimientoNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="fechaNuevo" class="letrasInfo text-center border"></td>
-                                    <td id="valorNuevo" class="letrasInfo text-center border"></td>
+                                    <td id="tipo" class="letrasInfo text-center border"></td>
+                                    <td id="codigo" class="letrasInfo text-center border"></td>
+                                    <td id="vencimiento" class="letrasInfo text-center border"></td>
+                                    <td id="valor" class="letrasInfo text-center border"></td>
                                 </tr>  
                             </tbody>
                         </table>
@@ -79,35 +80,31 @@
             </div>
             <!-- MODALES -->
             <!-- MODAL AGREGAR -->
-            <div id="agregarProducto" class="modal fade">
+            <div id="agregarCuenta" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">						
-                                <h4 class="modal-title">Agregar Producto</h4>
+                                <h4 class="modal-title">Agregar Pago</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" id="nombreProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <input type="text" id="proveedorProductoNuevo" class="form-control" required>
+                                    <label>Tipo</label>
+                                    <input type="text" id="tipoNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Codigo</label>
-                                    <input type="text" id="codigoProductoNuevo" class="form-control" required>
+                                    <input type="number" id="codigoNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <input type="number" id="cantidadProductoNuevo" class="form-control" required>
+                                    <label>Vencimiento</label>
+                                    <input type="date" id="vencimientoNuevo" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Costo</label>
-                                    <input type="number" id="costoProductoNuevo" class="form-control" required>
-                                </div>					
+                                    <label>Valor</label>
+                                    <input type="number" id="valorNuevo" class="form-control" required>
+                                </div>				
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancelar">
@@ -117,94 +114,19 @@
                     </div>
                 </div>
             </div>
-            <!-- MODAL EDITAR -->
-            <div id="editarProducto" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form>
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Editar Producto</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">					
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" id="nombreProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <input type="text" id="proveedorProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Codigo</label>
-                                    <input type="text" id="codigoProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <input type="number" id="cantidadProductoNuevo" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Costo</label>
-                                    <input type="number" id="costoProductoNuevo" class="form-control" required>
-                                </div>					
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancelar">
-                                <input type="submit" id="botonEditar" class="btn btn-success" value="Agregar">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- <div id="editarProducto" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form>
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Editar Producto</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">					
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Proveedor</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Codigo</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <input type="number" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Costo</label>
-                                    <input type="number" class="form-control" required>
-                                </div>					
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-danger" data-dismiss="modal" value="Cancelar">
-                                <input type="submit" id="botonEditar" class="btn btn-success" value="Guardar">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
             <!-- MODAL ELIMINAR  -->
-            <div id="eliminarProducto" class="modal fade">
+            <div id="eliminarCuenta" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">						
-                                <h4 class="modal-title">Eliminar producto</h4>
+                                <h4 class="modal-title">Eliminar Pago</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
-                            <div class="modal-body">					
-                                <p>Esta seguro que desea eliminar el producto ?</p>
+                            <div class="modal-body">	
+                                <label>Codigo</label>
+                                <input type="number" id="codigoEliminar" class="form-control" required>			
+                                <p>Esta seguro que desea eliminar el pago ?</p>
                                 <h6 class="text-danger">Esta acción no se puede deshacer.</h6>
                             </div>
                             <div class="modal-footer">
@@ -219,7 +141,8 @@
 
     <!-- a agregar  -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="js/pagos.js"></script>
+    <script src="js/pagos.js" type="module"></script>
     <script src="js/api.js" type="module"></script>
+    <script src="js/toast.js" type="module"></script>
 </body>
 </html>

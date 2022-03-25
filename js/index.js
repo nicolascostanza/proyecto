@@ -1,3 +1,5 @@
+// IMPORTS
+import { notificacionVerde, notificacionRoja } from './toast.js';
 // VARIABLES
 let stock = [];
 let btnAgregar = document.getElementById("botonAgregar");
@@ -24,86 +26,50 @@ class Producto{
     }
 }
 // FUNCIONES
-// FUNCIONES DE TOAST 
-function notificacionVerde(e){
-    Toastify({
-        text: e,
-        duration: 3000,
-        newWindow: true,
-        gravity: "top", 
-        position: "right", 
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-        background: "linear-gradient(to right, #00b09b, #96c93d)",
-        },
-        onClick: function(){} // Callback after click
-    }).showToast();
-}
-function notificacionRoja(e) {
-    Toastify({
-        text: e,
-        duration: 3000,
-        newWindow: true,
-        backgroundColor: "linear-gradient(to right, #f04f67, #ff0000)",
-        gravity: "top", 
-        position: "right", 
-        stopOnFocus: true, 
-        onClick: function(){} 
-    }).showToast();
-}
 // FUNCION BTN AGREGAR
-function agregar (e) {
-        respuesta = false;
-        let localStorageActualizado = [];
-        e.preventDefault();
-        let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
-        let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
-        let codigoProductoNuevo = document.getElementById("codigoProductoNuevo").value;
-        let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
-        let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
-        // verifico que los campos esten completos sino obligo a completarlos
-        if ((nombreProductoNuevo !== "" && nombreProductoNuevo !== null) &&
-        (proveedorProductoNuevo !== "" && proveedorProductoNuevo !== null) &&
-        (codigoProductoNuevo !== "" && codigoProductoNuevo !== null) &&
-        (cantidadProductoNuevo !== "" && cantidadProductoNuevo !== null) &&
-        (costoProductoNuevo !== "" && costoProductoNuevo !== null)) {
-            // traigo el localstorage actualizado para verificar que el codigo no este en uso
-            localStorageActualizado = JSON.parse(localStorage.getItem("productosNuevos"));
-            localStorageActualizado.forEach(localStorageActualizado => {
-                if(localStorageActualizado.codigo === codigoProductoNuevo){
-                    respuesta = true;
-                }
-            })
-            if (respuesta){
-                notificacionRoja("Codigo existente");
-            }else{ 
-                guardarDatos();
-                imprimirDatosNuevos();
-                notificacionVerde("Producto agregado");
-            }            
-        }else{
-            notificacionRoja("Complete todos los campos");
-        }
-        // le otorgo otro valor a respuesta para el proximo foreach de localStorageNuevo
-        respuesta = false;
-};
+function agregar(e) {
+	e.preventDefault();
+	let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
+	let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
+	let codigoProductoNuevo = document.getElementById("codigoProductoNuevo").value;
+	let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
+	let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
+	if (!stock.some((e) => e.codigo === codigoProductoNuevo)) {
+		// verifico que los campos esten completos sino obligo a completarlos
+		if (
+			nombreProductoNuevo !== "" &&
+			nombreProductoNuevo !== null &&
+			proveedorProductoNuevo !== "" &&
+			proveedorProductoNuevo !== null &&
+			codigoProductoNuevo !== "" &&
+			codigoProductoNuevo !== null &&
+			cantidadProductoNuevo !== "" &&
+			cantidadProductoNuevo !== null &&
+			costoProductoNuevo !== "" &&
+			costoProductoNuevo !== null
+		) {
+			guardarDatos(nombreProductoNuevo, proveedorProductoNuevo, codigoProductoNuevo, cantidadProductoNuevo, costoProductoNuevo);
+			imprimirDatosNuevos();
+			notificacionVerde("Producto agregado");
+		} else {
+			notificacionRoja("Complete todos los campos");
+		}
+	} else {
+		notificacionRoja("Codigo existente");
+	}
+}
 // SUBFUNCIONES DEL BTN AGREGAR
-function guardarDatos() {
-    let nombreProductoNuevo = document.getElementById("nombreProductoNuevo").value;
-    let proveedorProductoNuevo = document.getElementById("proveedorProductoNuevo").value;
-    let codigoProductoNuevo = document.getElementById("codigoProductoNuevo").value;
-    let cantidadProductoNuevo = document.getElementById("cantidadProductoNuevo").value;
-    let costoProductoNuevo = document.getElementById("costoProductoNuevo").value;
-    const producto = new Producto(nombreProductoNuevo, proveedorProductoNuevo, codigoProductoNuevo, cantidadProductoNuevo, costoProductoNuevo);
+function guardarDatos(nombre, proveedor, codigo, cantidad, costo) {
+    const producto = new Producto(nombre, proveedor, codigo, cantidad, costo);
     stock.push(producto);
     // guardo en localstorage el nuevo producto cargado
-    localStorage.setItem("productosNuevos", JSON.stringify(stock)); 
+    localStorage.setItem("ListaProductos", JSON.stringify(stock)); 
 }
 function imprimirDatosNuevos() {
     let agregar = [];
-    agregar = stock[stock.length-1]; 
+    agregar = stock[stock.length - 1]; 
     let costounitario = 0;
-    costounitario = ((agregar.costo)/(agregar.cantidad)).toFixed(2);
+    costounitario = ((agregar.costo) / (agregar.cantidad)).toFixed(2);
     let contenedorNombre = document.createElement("div");
     contenedorNombre.innerHTML = `<h2>${agregar.nombre}</h2>`;
     let contenedorProveedor = document.createElement("div");
@@ -126,7 +92,7 @@ function imprimirDatosNuevos() {
 }
 // IMPRIME LOS DATOS CUANDO CARGA LA PAGINA
 function imprimirDatos() {
-    stock.forEach(e => {
+    stock.forEach((e) => {
         let contenedorNombre = document.createElement("div");
         contenedorNombre.innerHTML = `<h2>${e.nombre}</h2>`;
         let contenedorProveedor = document.createElement("div");
@@ -150,25 +116,25 @@ function imprimirDatos() {
 }
 // FUNCION BOTON ELIMINAR
 function eliminar(e) {
-    respuesta = false; 
-    let localStorageActualizado = [];
-    e.preventDefault();
-    // tomo el valor y valido que haya rellenado
-    let codigoProductoEliminado = document.getElementById("codigoProductoEliminado").value;
-    if (codigoProductoEliminado !== "" && codigoProductoEliminado !== null) {
-        localStorageActualizado = JSON.parse(localStorage.getItem("productosNuevos"));
-        localStorageActualizado.forEach(localStorageActualizado => {
-            if(localStorageActualizado.codigo === codigoProductoEliminado){
-                respuesta = true;
-            }})
-            // segun si el codigo existe borro o no
-            if (respuesta){
-                const codigos = localStorageActualizado.map((e) => e.codigo);    
-                const indice = codigos.indexOf(codigoProductoEliminado);
-                guardar.splice(indice, 1);
-                localStorage.setItem("productosNuevos", JSON.stringify(guardar)); 
-
-                notificacionVerde("producto eliminado. F5 para ver cambios");
+    respuesta = false;
+	let localStorageActualizado = [];
+	e.preventDefault();
+	// tomo el valor y valido que haya rellenado
+	let codigoProductoEliminado = document.getElementById("codigoProductoEliminado").value;
+	if (codigoProductoEliminado !== "" && codigoProductoEliminado !== null) {
+		localStorageActualizado = JSON.parse(localStorage.getItem("ListaProductos"));
+		localStorageActualizado.forEach((ls) => {
+			if (ls.codigo === codigoProductoEliminado) {
+				respuesta = true;
+			}
+		});
+		// segun si el codigo existe borro o no
+		if (respuesta) {
+			const codigos = localStorageActualizado.map((e) => e.codigo);
+			const indice = codigos.indexOf(codigoProductoEliminado);
+			guardar.splice((indice), 1);
+			localStorage.setItem("ListaProductos", JSON.stringify(guardar));
+            notificacionVerde("producto eliminado. F5 para ver cambios");
             }else{ 
                 notificacionRoja("Codigo Inexistente");
             }            
@@ -178,6 +144,6 @@ function eliminar(e) {
     respuesta = false; 
 }
 // CODIGO PRINCIPAL
-let guardar = JSON.parse(localStorage.getItem("productosNuevos"));
+let guardar = JSON.parse(localStorage.getItem("ListaProductos"));
 stock = guardar || [];
 imprimirDatos();
